@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>chush - !</title>
+<style>
+  :root {
+    --bg: #ffffff; --fg: #111111;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --bg: #0d0d0d; --fg: #eaeaea; }
+  }
+  :root[data-theme="dark"] { --bg: #0d0d0d; --fg: #eaeaea; }
+  * { box-sizing: inherit; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: var(--bg); color: var(--fg);
+    font-family: Georgia, "Times New Roman", serif;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+  }
+  .glyph {
+    font-size: clamp(6rem, 30vw, 14rem);
+    line-height: 1;
+    user-select: none;
+  }
+</style>
+</head>
+<body>
+<div class="glyph">@</div>
+</body>
+</html>

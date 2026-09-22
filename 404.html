@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>chush</title>
+<style>
+  :root {
+    --bg: #ffffff; --fg: #111111; --dim: #999999;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --bg: #0d0d0d; --fg: #eaeaea; --dim: #666666; }
+  }
+  :root[data-theme="dark"] { --bg: #0d0d0d; --fg: #eaeaea; --dim: #666666; }
+  * { box-sizing: inherit; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: var(--bg); color: var(--fg);
+    font-family: Georgia, "Times New Roman", serif;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+  }
+  .glyph {
+    font-size: clamp(6rem, 30vw, 14rem);
+    line-height: 1;
+    user-select: none;
+  }
+  .small { font-size: 1.05rem; line-height: 1.7; max-width: 34em; padding: 0 20px; }
+  .dim { color: var(--dim); font-size: .85rem; margin-top: 2.5em; }
+  a { color: inherit; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+  // ==========================================================================
+  // chush — a url puzzle game.
+  // GitHub Pages serves this 404.html for every path that isn't a real file,
+  // so this file IS the game: it looks at the URL and renders that level.
+  //
+  // To add a level: add an entry below. Key = the URL path (without the
+  // leading slash), value = { title, html }.
+  // ==========================================================================
+  const LEVELS = {
+    // Level 1 — the URL says ! but the screen says @ ...
+    "!": {
+      title: "chush - !",
+      html: '<div class="glyph">@</div>'
+    },
+
+    // Level 2 — reached by editing the URL from ! to @
+    "@": {
+      title: "chush - @",
+      html: '<div class="small">' +
+            'good. you can read a url.<br><br>' +
+            'level 2 is being built.<br>' +
+            '<span class="dim">come back soon — chush is just getting started.</span>' +
+            '</div>'
+    },
+  };
+
+  const WRONG = {
+    title: "chush",
+    html: '<div class="small dim">there is nothing here.</div>'
+  };
+
+  let path = decodeURIComponent(location.pathname).replace(/^\/+|\/+$/g, "");
+  const level = LEVELS[path] || WRONG;
+  document.title = level.title;
+  document.getElementById("root").innerHTML = level.html;
+</script>
+</body>
+</html>
